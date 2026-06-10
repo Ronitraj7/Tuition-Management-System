@@ -1,0 +1,152 @@
+{
+  "entities": {
+    "student": {
+      "title": "Student",
+      "description": "Student roster record",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string" },
+        "name": { "type": "string" },
+        "class": { "type": "string" },
+        "batch": { "type": "string" },
+        "phone": { "type": "string" },
+        "parentName": { "type": "string" },
+        "parentPhone": { "type": "string" },
+        "fees": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": ["Paid", "Pending", "Partial"]
+        },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "subjects": { "type": "string" }
+      },
+      "required": ["studentId", "name", "class", "batch", "phone", "parentName", "parentPhone", "fees", "status", "email"]
+    },
+    "teacher": {
+      "title": "Teacher",
+      "description": "Teacher faculty record",
+      "type": "object",
+      "properties": {
+        "teacherId": { "type": "string" },
+        "name": { "type": "string" },
+        "subject": { "type": "string" },
+        "salary": { "type": "number" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["teacherId", "name", "subject", "salary", "phone", "email"]
+    },
+    "attendance": {
+      "title": "Attendance",
+      "description": "Daily student attendance marker",
+      "type": "object",
+      "properties": {
+        "attendanceId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "class": { "type": "string" },
+        "date": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["Present", "Absent", "Holiday"]
+        }
+      },
+      "required": ["attendanceId", "studentId", "date", "status"]
+    },
+    "batch": {
+      "title": "Batch",
+      "description": "Tuition batch class schedule",
+      "type": "object",
+      "properties": {
+        "batchId": { "type": "string" },
+        "batchName": { "type": "string" },
+        "timing": { "type": "string" },
+        "teacher": { "type": "string" }
+      },
+      "required": ["batchId", "batchName", "timing", "teacher"]
+    },
+    "receipt": {
+      "title": "FeeReceipt",
+      "description": "Payment receipt logged for tuition fee payments",
+      "type": "object",
+      "properties": {
+        "receiptId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentId": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "mode": {
+          "type": "string",
+          "enum": ["UPI", "Cash", "Card"]
+        },
+        "month": { "type": "string" }
+      },
+      "required": ["receiptId", "studentName", "amount", "date", "mode", "month"]
+    },
+    "setting": {
+      "title": "Setting",
+      "description": "System settings and administrator configs",
+      "type": "object",
+      "properties": {
+        "password": { "type": "string" },
+        "whatsappWebhook": { "type": "string" },
+        "whatsappSenderPhone": { "type": "string" },
+        "autoSendOnAbsent": { "type": "boolean" },
+        "autoSendFeeReminder": { "type": "boolean" }
+      },
+      "required": ["password"]
+    },
+    "dispatch": {
+      "title": "DispatchLog",
+      "description": "Log of automatically dispatched notifications and reminders",
+      "type": "object",
+      "properties": {
+        "dispatchId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "recipient": { "type": "string" },
+        "phone": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["Fee Reminder", "Absence Alert"]
+        },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "status": { "type": "string" },
+        "channel": { "type": "string" }
+      },
+      "required": ["dispatchId", "studentId", "recipient", "phone", "type", "message", "timestamp", "status"]
+    }
+  },
+  "firestore": {
+    "students": {
+      "schema": "student",
+      "description": "Collection of total registered student profiles"
+    },
+    "teachers": {
+      "schema": "teacher",
+      "description": "Collection of total active faculty members"
+    },
+    "attendance": {
+      "schema": "attendance",
+      "description": "Attendance history log of student presences"
+    },
+    "batches": {
+      "schema": "batch",
+      "description": "Details of different class batches"
+    },
+    "receipts": {
+      "schema": "receipt",
+      "description": "Logged dynamic tuition receipt history"
+    },
+    "settings": {
+      "schema": "setting",
+      "description": "System configuration and credentials store"
+    },
+    "dispatches": {
+      "schema": "dispatch",
+      "description": "Collection of total automated communication dispatches"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Tuition Management Dashboard",
+  "description": "A comprehensive tuition management platform with role-based features, student and teacher tables, attendance tracking, batch scheduling, fee receipts, dashboard statistics, and integrated WhatsApp reminders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
